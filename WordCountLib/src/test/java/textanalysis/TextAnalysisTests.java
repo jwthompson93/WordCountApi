@@ -1,47 +1,50 @@
 package textanalysis;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import org.thompson.james.textanalysis.testcases.TextAnalysisTestCases;
 import org.apache.commons.math3.util.Precision;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.thompson.james.textanalysis.TextAnalysis;
+import org.thompson.james.textanalysis.object.TextAnalysisResult;
 
 public class TextAnalysisTests {
-
+    
     private TextAnalysis textAnalysis;
+    
     public TextAnalysisTests() {
         this.textAnalysis = new TextAnalysis();
     }
 
-    @Test
-    void Test_GetWordCount() {
-        for (var testCase : TextAnalysisTestCases.textAnalysisTestCases) {
-            int wordCount = textAnalysis.GetWordCount(testCase.getSplitSentence());
-            Assertions.assertEquals(testCase.getWordAmount(), wordCount);
-        }
+    @ParameterizedTest
+    @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#data")
+    void Test_GetWordCount(TextAnalysisResult textAnalysisResult) {
+        int wordCount = textAnalysis.GetWordCount(textAnalysisResult.getSplitSentence());
+        Assertions.assertEquals(textAnalysisResult.getWordAmount(), wordCount);
     }
 
-    @Test
-    void Test_GetAverageWordLength() {
-        for (var testCase : TextAnalysisTestCases.textAnalysisTestCases) {
-            double averageWordLength = textAnalysis.GetAverageWordLength(testCase.getSplitSentence());
-            Assertions.assertEquals(testCase.getAverageWordLength(), Precision.round(averageWordLength, 5));
-        }
+    @ParameterizedTest
+    @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#data")
+    void Test_GetAverageWordLength(TextAnalysisResult textAnalysisResult) {
+        double averageWordLength = textAnalysis.GetAverageWordLength(textAnalysisResult.getSplitSentence());
+        Assertions.assertEquals(textAnalysisResult.getAverageWordLength(), Precision.round(averageWordLength, 5));
     }
 
-    @Test
-    void Test_GetNumberOfWordsOfLengthMap() {
-        for (var testCase : TextAnalysisTestCases.textAnalysisTestCases) {
-            var numberOfWordsOfLengthMap = textAnalysis.GetNumberOfWordsOfLengthMap(testCase.getSplitSentence());
-            Assertions.assertTrue(numberOfWordsOfLengthMap.entrySet().containsAll(testCase.getNumberOfWordsOfLength().entrySet()));
-        }
+    @ParameterizedTest
+    @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#data")
+    void Test_GetNumberOfWordsOfLengthMap(TextAnalysisResult textAnalysisResult) {
+        var numberOfWordsOfLengthMap = textAnalysis.GetNumberOfWordsOfLengthMap(textAnalysisResult.getSplitSentence());
+        Assertions.assertTrue(numberOfWordsOfLengthMap.entrySet().containsAll(textAnalysisResult.getNumberOfWordsOfLength().entrySet()));
     }
 
-    @Test
-    void Test_GetMostOccurringWordLength() {
-        for (var testCase : TextAnalysisTestCases.textAnalysisTestCases) {
-            var mostOccuringWordLength = textAnalysis.GetMostOccurringWordLength(testCase.getNumberOfWordsOfLength());
-            Assertions.assertTrue(mostOccuringWordLength.equals(testCase.getHighestOccurringWordLength()));
-        }
+    @ParameterizedTest
+    @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#data")
+    void Test_GetMostOccurringWordLength(TextAnalysisResult textAnalysisResult) {
+        var mostOccuringWordLength = textAnalysis.GetMostOccurringWordLength(textAnalysisResult.getNumberOfWordsOfLength());
+        Assertions.assertTrue(mostOccuringWordLength.containsAll(textAnalysisResult.getHighestOccurringWordLength()));
     }
 }

@@ -20,7 +20,9 @@ public class TextAnalysis {
                 .collect(Collectors.toMap(String::length, i -> 1, Integer::sum));
     }
 
-    public Map.Entry<Integer, Integer> GetMostOccurringWordLength(Map<Integer, Integer> processedSentenceMap) {
-        return processedSentenceMap.entrySet().stream().max((o1, o2) -> o1.getValue().compareTo(o2.getValue())).get();
+    public List<Map.Entry<Integer, Integer>> GetMostOccurringWordLength(Map<Integer, Integer> processedSentenceMap) {
+        Integer maxValue = Collections.max(processedSentenceMap.entrySet(), Map.Entry.comparingByValue()).getValue();
+        return processedSentenceMap.entrySet().stream()
+                .filter(entry -> Objects.equals(entry.getValue(), maxValue)).collect(Collectors.toList());
     }
 }
