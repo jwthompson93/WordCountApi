@@ -1,7 +1,6 @@
 package org.thompson.james.textanalysis;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TextAnalysis {
@@ -9,10 +8,10 @@ public class TextAnalysis {
         return processedSentence.length;
     }
 
-    public Integer GetAverageWordLength(String[] processedSentence) {
+    public Double GetAverageWordLength(String[] processedSentence) {
         return Arrays
                 .stream(processedSentence)
-                .mapToInt(String::length).sum() / processedSentence.length;
+                .mapToDouble(String::length).sum() / processedSentence.length;
     }
 
     public Map<Integer, Integer> GetNumberOfWordsOfLengthMap(String[] processedSentence) {
@@ -22,6 +21,6 @@ public class TextAnalysis {
     }
 
     public Map.Entry<Integer, Integer> GetMostOccurringWordLength(Map<Integer, Integer> processedSentenceMap) {
-        return processedSentenceMap.entrySet().stream().max();
+        return processedSentenceMap.entrySet().stream().max((o1, o2) -> o1.getValue().compareTo(o2.getValue())).get();
     }
 }

@@ -5,23 +5,42 @@ import java.util.SortedMap;
 
 public class TextAnalysisResult {
     private String sentence;
+    private String[] splitSentence;
     private Integer wordAmount;
     private Double averageWordLength;
-    private SortedMap<Integer, Integer> numberOfWordsOfLength;
+    private Map<Integer, Integer> numberOfWordsOfLength;
     private Map.Entry<Integer, Integer> highestOccurringWordLength;
 
     public TextAnalysisResult(String sentence) {
         this.sentence = sentence;
     }
 
-    public TextAnalysisResult(String sentence, Integer wordAmount, Double averageWordLength,
-                              SortedMap<Integer, Integer> numberOfWordsOfLength,
+    public TextAnalysisResult(String sentence, String[] splitSentence,
+                              Integer wordAmount, Double averageWordLength,
+                              Map<Integer, Integer> numberOfWordsOfLength,
                               Map.Entry<Integer, Integer> highestOccurringWordLength) {
         this.sentence = sentence;
+        this.splitSentence = splitSentence;
         this.wordAmount = wordAmount;
         this.averageWordLength = averageWordLength;
         this.numberOfWordsOfLength = numberOfWordsOfLength;
         this.highestOccurringWordLength = highestOccurringWordLength;
+    }
+
+    public String getSentence() {
+        return sentence;
+    }
+
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
+    }
+
+    public String[] getSplitSentence() {
+        return splitSentence;
+    }
+
+    public void setSplitSentence(String[] splitSentence) {
+        this.splitSentence = splitSentence;
     }
 
     public Integer getWordAmount() {
@@ -40,11 +59,11 @@ public class TextAnalysisResult {
         this.averageWordLength = averageWordLength;
     }
 
-    public SortedMap<Integer, Integer> getNumberOfWordsOfLength() {
+    public Map<Integer, Integer> getNumberOfWordsOfLength() {
         return numberOfWordsOfLength;
     }
 
-    public void setNumberOfWordsOfLength(SortedMap<Integer, Integer> numberOfWordsOfLength) {
+    public void setNumberOfWordsOfLength(Map<Integer, Integer> numberOfWordsOfLength) {
         this.numberOfWordsOfLength = numberOfWordsOfLength;
     }
 
