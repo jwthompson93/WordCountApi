@@ -1,15 +1,18 @@
 package org.thompson.james.textanalysis.object;
 
+import com.google.gson.annotations.JsonAdapter;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class TextAnalysisResult {
-    private String sentence;
-    private String[] splitSentence;
+public class TextAnalysisResult implements Serializable {
+    private transient String sentence;
+    private transient String[] splitSentence;
+    
     private Integer wordAmount;
     private Double averageWordLength;
     private Map<Integer, Integer> numberOfWordsOfLength;
-    private List<Map.Entry<Integer, Integer>> highestOccurringWordLength;
+    private Map<Integer, Integer> highestOccurringWordLength;
 
     public TextAnalysisResult(String sentence) {
         this.sentence = sentence;
@@ -18,7 +21,7 @@ public class TextAnalysisResult {
     public TextAnalysisResult(String sentence, String[] splitSentence,
                               Integer wordAmount, Double averageWordLength,
                               Map<Integer, Integer> numberOfWordsOfLength,
-                              List<Map.Entry<Integer, Integer>> highestOccurringWordLength) {
+                              Map<Integer, Integer> highestOccurringWordLength) {
         this.sentence = sentence;
         this.splitSentence = splitSentence;
         this.wordAmount = wordAmount;
@@ -47,7 +50,7 @@ public class TextAnalysisResult {
         return wordAmount;
     }
 
-    public void setWordAmount(Integer wordAmount) {
+    public void setWordCount(Integer wordAmount) {
         this.wordAmount = wordAmount;
     }
 
@@ -67,11 +70,11 @@ public class TextAnalysisResult {
         this.numberOfWordsOfLength = numberOfWordsOfLength;
     }
 
-    public List<Map.Entry<Integer, Integer>> getHighestOccurringWordLength() {
+    public Map<Integer, Integer> getHighestOccurringWordLength() {
         return highestOccurringWordLength;
     }
 
-    public void setHighestOccurringWordLength(List<Map.Entry<Integer, Integer>> highestOccurringWordLength) {
+    public void setHighestOccurringWordLength(Map<Integer, Integer> highestOccurringWordLength) {
         this.highestOccurringWordLength = highestOccurringWordLength;
     }
 }

@@ -1,6 +1,7 @@
 package org.thompson.james.textanalysis;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class TextAnalysis {
@@ -20,9 +21,11 @@ public class TextAnalysis {
                 .collect(Collectors.toMap(String::length, i -> 1, Integer::sum));
     }
 
-    public List<Map.Entry<Integer, Integer>> GetMostOccurringWordLength(Map<Integer, Integer> processedSentenceMap) {
+    public Map<Integer, Integer> GetMostOccurringWordLength(Map<Integer, Integer> processedSentenceMap) {
         Integer maxValue = Collections.max(processedSentenceMap.entrySet(), Map.Entry.comparingByValue()).getValue();
-        return processedSentenceMap.entrySet().stream()
-                .filter(entry -> Objects.equals(entry.getValue(), maxValue)).collect(Collectors.toList());
+        return processedSentenceMap.entrySet()
+                .stream()
+                .filter(entry -> Objects.equals(entry.getValue(), maxValue))
+                .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
     }
 }
