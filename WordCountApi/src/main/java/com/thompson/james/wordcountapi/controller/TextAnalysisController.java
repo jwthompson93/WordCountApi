@@ -1,12 +1,12 @@
 package com.thompson.james.wordcountapi.controller;
 
 import java.io.IOException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thompson.james.file.TextFileReader;
-import org.thompson.james.format.TextAnalysisFormat;
 import org.thompson.james.process.TextAnalysisProcess;
 
 /**
@@ -20,7 +20,7 @@ public class TextAnalysisController {
     private TextAnalysisProcess textAnalysisProcess;
     
     public TextAnalysisController() {
-        textAnalysisProcess = new TextAnalysisProcess(new TextAnalysisFormat());
+        textAnalysisProcess = new TextAnalysisProcess();
     }
     
     @GetMapping()
@@ -28,12 +28,32 @@ public class TextAnalysisController {
         return "Pong!";
     }
     
-    @PostMapping(path = "/process", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> ProcessFile(@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping(path = "/file/process/json", 
+                consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
+                produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> ProcessFileToJson(
+            @RequestParam("file") MultipartFile file) throws IOException {
         TextFileReader fileReader = new TextFileReader();
         String text = fileReader.getTextFromFile(file.getInputStream());
         
-        String responseJson = textAnalysisProcess.process(text);
+        String responseJson = textAnalysisProcess.process(text, "textanalysis");
         return ResponseEntity.ok(responseJson);
+    }
+    
+    @PostMapping(path = "/file/process/html", 
+                consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
+                produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> ProcessFileToHtml(
+            @RequestParam("file") MultipartFile file) throws IOException {
+        TextFileReader fileReader = new TextFileReader();
+        String text = fileReader.getTextFromFile(file.getInputStream());
+        
+        String responseJson = textAnalysisProcess.process(text, "textanalysis");
+        return ResponseEntity.ok(responseJson);
+    }
+    
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity handleIoException(IOException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not handle file");
     }
 }

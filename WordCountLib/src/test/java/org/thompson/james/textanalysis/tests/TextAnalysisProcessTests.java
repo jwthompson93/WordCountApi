@@ -26,8 +26,8 @@ public class TextAnalysisProcessTests {
     @ParameterizedTest
     @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#TestCases")
     void Test_ProcessString(TextAnalysisResult input) throws IOException {
-        IProcess<String> textAnalysisProcess = new TextAnalysisProcess(new JsonFormat());
-        String JsonResult = textAnalysisProcess.process(input.getSentence());
+        IProcess<String> textAnalysisProcess = new TextAnalysisProcess();
+        String JsonResult = textAnalysisProcess.process(input.getSentence(), "json");
         System.out.println(JsonResult);
         
         assertEquals(JsonParser.parseString(JsonResult), JsonParser.parseString(gson.toJson(input)));

@@ -23,8 +23,8 @@ public class TextAnalysisFileTest {
         TextFileReader textFile = new TextFileReader();
         String txt = textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").openStream());
         
-        IProcess<String> textAnalysisProcess = new TextAnalysisProcess(new JsonFormat());
-        String JsonResult = textAnalysisProcess.process(txt);
+        IProcess<String> textAnalysisProcess = new TextAnalysisProcess();
+        String JsonResult = textAnalysisProcess.process(txt, "json");
         assertNotNull(JsonResult);
     }
 }
