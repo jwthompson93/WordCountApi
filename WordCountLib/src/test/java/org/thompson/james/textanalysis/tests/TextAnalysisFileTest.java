@@ -4,6 +4,7 @@
  */
 package org.thompson.james.textanalysis.tests;
 
+import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.thompson.james.file.TextFileReader;
@@ -17,9 +18,10 @@ import org.thompson.james.process.TextAnalysisProcess;
 public class TextAnalysisFileTest {
     
     @Test 
-    void Test_ProcessTextFromFile() {
+    void Test_ProcessTextFromFile() throws IOException {
         TextFileReader textFile = new TextFileReader();
-        String txt = textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").getFile());
+        String txt = textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").openStream());
+        
         IProcess<String> textAnalysisProcess = new TextAnalysisProcess();
         String JsonResult = textAnalysisProcess.process(txt);
         assertNotNull(JsonResult);

@@ -1,8 +1,6 @@
 package org.thompson.james.textanalysis.object;
 
-import com.google.gson.annotations.JsonAdapter;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 public class TextAnalysisResult implements Serializable {
