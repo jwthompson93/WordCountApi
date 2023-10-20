@@ -20,13 +20,13 @@ public class TextAnalysisFormat implements IFormat<TextAnalysisResult> {
     public String format(TextAnalysisResult input) {
         StringBuilder returnString = new StringBuilder();
         
-        returnString.append(String.format("Word count = %x <br>", input.getWordAmount()));
-        returnString.append(String.format("Average Word Length = %f <br>", input.getAverageWordLength()));
+        returnString.append(String.format("Word count = %s \n", input.getWordAmount()));
+        returnString.append(String.format("Average Word Length = %s \n", input.getAverageWordLength()));
         input.getNumberOfWordsOfLength().forEach((key, value) -> {
-            returnString.append(String.format("Number of words of length %x is %x <br>", key, value));
+            returnString.append(String.format("Number of words of length %s is %s \n", key, value));
         });
         returnString.append(
-                String.format("The most frequently occurring word length is %x, for word lengths of %s <br>", 
+                String.format("The most frequently occurring word length is %s, for word lengths of %s \n", 
                 input.getHighestOccurringWordLength().values().toArray()[0],
                 input.getHighestOccurringWordLength().keySet().stream().map(String::valueOf).collect(Collectors.joining(", "))));
         

@@ -40,10 +40,10 @@ public class TextAnalysisController {
         return ResponseEntity.ok(responseJson);
     }
     
-    @PostMapping(path = "/file/process/html", 
+    @PostMapping(path = "/file/process/text", 
                 consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
                 produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> ProcessFileToHtml(
+    public ResponseEntity<String> ProcessFileToText(
             @RequestParam("file") MultipartFile file) throws IOException {
         TextFileReader fileReader = new TextFileReader();
         String text = fileReader.getTextFromFile(file.getInputStream());
