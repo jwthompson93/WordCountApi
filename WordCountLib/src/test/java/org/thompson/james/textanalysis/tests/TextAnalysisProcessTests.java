@@ -6,6 +6,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.thompson.james.format.JsonFormat;
 import org.thompson.james.process.IProcess;
 import org.thompson.james.process.TextAnalysisProcess;
 import org.thompson.james.textanalysis.object.TextAnalysisResult;
@@ -25,7 +26,7 @@ public class TextAnalysisProcessTests {
     @ParameterizedTest
     @MethodSource("org.thompson.james.textanalysis.testcases.TextAnalysisTestCases#TestCases")
     void Test_ProcessString(TextAnalysisResult input) throws IOException {
-        IProcess<String> textAnalysisProcess = new TextAnalysisProcess();
+        IProcess<String> textAnalysisProcess = new TextAnalysisProcess(new JsonFormat());
         String JsonResult = textAnalysisProcess.process(input.getSentence());
         System.out.println(JsonResult);
         

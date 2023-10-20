@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.thompson.james.file.TextFileReader;
+import org.thompson.james.format.JsonFormat;
 import org.thompson.james.process.IProcess;
 import org.thompson.james.process.TextAnalysisProcess;
 
@@ -22,7 +23,7 @@ public class TextAnalysisFileTest {
         TextFileReader textFile = new TextFileReader();
         String txt = textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").openStream());
         
-        IProcess<String> textAnalysisProcess = new TextAnalysisProcess();
+        IProcess<String> textAnalysisProcess = new TextAnalysisProcess(new JsonFormat());
         String JsonResult = textAnalysisProcess.process(txt);
         assertNotNull(JsonResult);
     }

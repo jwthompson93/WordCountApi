@@ -2,6 +2,7 @@ package org.thompson.james.process;
 
 import com.google.gson.Gson;
 import org.thompson.james.file.TextFileReader;
+import org.thompson.james.format.IFormat;
 import org.thompson.james.string.Regex;
 import org.thompson.james.textanalysis.TextAnalysis;
 import org.thompson.james.textanalysis.object.TextAnalysisResult;
@@ -14,10 +15,12 @@ public class TextAnalysisProcess implements IProcess<String> {
 
     private TextAnalysis textAnalysis;
     private Gson gson;
+    private IFormat<TextAnalysisResult> format;
     
-    public TextAnalysisProcess() {
+    public TextAnalysisProcess(IFormat format) {
         this.textAnalysis = new TextAnalysis();
         this.gson = new Gson();
+        this.format = format;
     }
     
     @Override
@@ -27,7 +30,7 @@ public class TextAnalysisProcess implements IProcess<String> {
         
         var textAnalysisResult = performTextAnalysis(input, splitCleansedInput);
         
-        return gson.toJson(textAnalysisResult);
+        return format.format(textAnalysisResult);
     }
     
     private TextAnalysisResult performTextAnalysis(String input, String[] splitInput) {

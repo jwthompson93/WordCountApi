@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thompson.james.file.TextFileReader;
+import org.thompson.james.format.TextAnalysisFormat;
 import org.thompson.james.process.TextAnalysisProcess;
 
 /**
@@ -19,7 +20,7 @@ public class TextAnalysisController {
     private TextAnalysisProcess textAnalysisProcess;
     
     public TextAnalysisController() {
-        textAnalysisProcess = new TextAnalysisProcess();
+        textAnalysisProcess = new TextAnalysisProcess(new TextAnalysisFormat());
     }
     
     @GetMapping()
@@ -27,7 +28,7 @@ public class TextAnalysisController {
         return "Pong!";
     }
     
-    @PostMapping(path = "/process", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/process", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> ProcessFile(@RequestParam("file") MultipartFile file) throws IOException {
         TextFileReader fileReader = new TextFileReader();
         String text = fileReader.getTextFromFile(file.getInputStream());
