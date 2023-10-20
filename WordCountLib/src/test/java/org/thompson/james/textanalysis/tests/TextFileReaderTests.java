@@ -14,6 +14,6 @@ public class TextFileReaderTests {
     void Test_GetTextFromFile() {
         TextFileReader textFile = new TextFileReader();
         Assertions.assertDoesNotThrow(() -> 
-                textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").getFile()));
+                textFile.getTextFromFile(getClass().getClassLoader().getResource("bible_daily.txt").openStream()));
     }
 }
