@@ -1,4 +1,11 @@
-# Getting Started
+# Text Analysis API
+A simple API application with a HTTP method to accept a file and output the following information about the file:
+* The amount of words
+* The average word length
+* A count of word lengths
+* The highest count of word lengths
+
+## Getting Started
 To run this application, you will need the following:
 - Java 11+
 - Apache Maven
