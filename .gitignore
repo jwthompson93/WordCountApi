@@ -29,3 +29,10 @@ bin/
 .DS_Store
 WordCountLib/src/main/resources/.~lock.bible_daily.txt\#
 /WordCountApi/target/
+WordCountApi/.idea/vcs.xml
+WordCountApi/.idea/misc.xml
+WordCountApi/.idea/jarRepositories.xml
+WordCountApi/.idea/encodings.xml
+WordCountApi/.idea/compiler.xml
+WordCountLib/.idea/misc.xml
+WordCountLib/.idea/misc.xml
