@@ -30,7 +30,7 @@ public class TextAnalysisController {
     
     @PostMapping(path = "/file/process/json", 
                 consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
-                produces = MediaType.TEXT_HTML_VALUE)
+                produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> ProcessFileToJson(
             @RequestParam("file") MultipartFile file) throws IOException {
         TextFileReader fileReader = new TextFileReader();
@@ -42,7 +42,7 @@ public class TextAnalysisController {
     
     @PostMapping(path = "/file/process/text", 
                 consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
-                produces = MediaType.TEXT_HTML_VALUE)
+                produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> ProcessFileToText(
             @RequestParam("file") MultipartFile file) throws IOException {
         TextFileReader fileReader = new TextFileReader();
