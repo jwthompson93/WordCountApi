@@ -48,8 +48,8 @@ public class TextAnalysisController {
         TextFileReader fileReader = new TextFileReader();
         String text = fileReader.getTextFromFile(file.getInputStream());
         
-        String responseJson = textAnalysisProcess.process(text, "textanalysis");
-        return ResponseEntity.ok(responseJson);
+        String responseText = textAnalysisProcess.process(text, "textanalysis");
+        return ResponseEntity.ok(responseText);
     }
     
     @ExceptionHandler(IOException.class)
