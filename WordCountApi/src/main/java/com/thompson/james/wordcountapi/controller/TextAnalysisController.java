@@ -36,7 +36,7 @@ public class TextAnalysisController {
         TextFileReader fileReader = new TextFileReader();
         String text = fileReader.getTextFromFile(file.getInputStream());
         
-        String responseJson = textAnalysisProcess.process(text, "textanalysis");
+        String responseJson = textAnalysisProcess.process(text, "json");
         return ResponseEntity.ok(responseJson);
     }
     
