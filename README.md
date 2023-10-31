@@ -33,7 +33,7 @@ To run this application, you will need the following:
 2. Below the text-analysis-controller, click on the '/api/textanalysis/file/process/text' drawer.
 3. Click on the 'Try it out' button' on the right-hand side.
 4. Click on the 'Choose file' button that's appeared and choose the text file to be analysed.
-5. Click on the Execute button. After a short while, a Response Body will appear showing JSON showing the following information about the text:
+5. Click on the Execute button. After a short while, a Response Body will appear showing the following information about the text:
 	* The amount of words
 	* The average word length
 	* A count of word lengths
